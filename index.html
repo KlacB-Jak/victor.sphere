@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#000000">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="НИИ «Сфера»">
+<title>НИИ «Сфера» · Досье</title>
+
+<link rel="icon" type="image/x-icon" href="favicon.ico?v=1">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon.png?v=1">
+<link rel="shortcut icon" href="favicon.ico?v=1">
+<link rel="apple-touch-icon" sizes="180x180" href="favicon.png?v=1">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Handjet:wght@300;400;600;800&family=VT323&family=JetBrains+Mono:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ============ BOOT ============ -->
+<div id="boot" class="boot">
+    <div class="boot__scan"></div>
+    <div class="boot__inner">
+        <pre class="boot__log" id="bootLog"></pre>
+    </div>
+</div>
+
+<!-- ============ ЭФФЕКТЫ ============ -->
+<div class="fx fx--scanlines"></div>
+<div class="fx fx--noise"></div>
+<div class="fx fx--vignette"></div>
+<div class="fx fx--grain"></div>
+<div class="fx fx--edge"></div>
+<div class="fx fx--glitch" id="fxGlitch"></div>
+
+<!-- ============ ОСНОВНОЙ ИНТЕРФЕЙС ============ -->
+<div class="shell" id="shell" hidden>
+
+    <header class="head">
+        <div class="head__left">
+            <a class="head__mark" href="#dossier" data-nav data-page="dossier">НИИ «СФЕРА»</a>
+            <span class="head__sub">Научно-исследовательский институт «Сфера»</span>
+        </div>
+        <div class="head__right">
+            <div class="vol">
+                <span class="vol__label">ЗВУК</span>
+                <input type="range" id="vol" min="0" max="100" value="50" class="vol__slider">
+                <button class="vol__mute" id="muteBtn">mute</button>
+            </div>
+        </div>
+    </header>
+
+    <nav class="tabs">
+        <a class="tab" data-nav data-page="dossier"       href="#dossier">Личное дело</a>
+        <a class="tab" data-nav data-page="dialog"        href="#dialog">Переписка</a>
+        <a class="tab" data-nav data-page="motivation"    href="#motivation">Мотивация</a>
+        <a class="tab" data-nav data-page="goals"         href="#goals">Личные подцели</a>
+        <a class="tab" data-nav data-page="goals-shared"  href="#goals-shared">Общие цели</a>
+    </nav>
+
+    <main class="content" id="content"></main>
+
+    <div class="hint-bar" id="hintBar">
+        <span class="hint-bar__dot"></span>
+        <span>клик по странице — открыть следующую реплику</span>
+    </div>
+
+    <footer class="foot">
+        <span>НИИ «СФЕРА» · 1974—1991</span>
+    </footer>
+</div>
+
+<!-- ============================================================
+     ШАБЛОНЫ СТРАНИЦ
+     ============================================================ -->
+
+<!-- ==================================================
+     1. ЛИЧНОЕ ДЕЛО
+     ================================================== -->
+<script type="text/template" id="tpl-dossier">
+<section class="doc doc--dossier">
+
+    <h2 class="doc__title">ЛИЧНОЕ ДЕЛО</h2>
+
+    <div class="dossier__name">Мельник Виктор Иванович.</div>
+
+    <dl class="dossier__meta">
+        <div class="field">
+            <dt class="field__label">Возраст</dt>
+            <dd class="field__value">58 лет.</dd>
+        </div>
+        <div class="field">
+            <dt class="field__label">Пол</dt>
+            <dd class="field__value">мужской.</dd>
+        </div>
+        <div class="field field--wide">
+            <dt class="field__label">Образование</dt>
+            <dd class="field__value">МФТИ, факультет управления и прикладной математики. Вычислительные системы, программирование.</dd>
+        </div>
+        <div class="field field--wide">
+            <dt class="field__label">Место работы</dt>
+            <dd class="field__value">не работает. Пенсионер. Бывший технический руководитель проекта «Морфей» в НИИ «Сфера» (1983–1992).</dd>
+        </div>
+    </dl>
+
+    <div class="dossier__section">Биография</div>
+
+    <div class="dossier__body">
+        <p>Родился в Новосибирске, в семье военного инженера. Академгородок, физики, математики, разговоры о науке с пяти лет. Поступил в МФТИ в 18. Закончил с отличием в 1983.</p>
+
+        <p>По распределению попал в НИИ «Сфера». Закрытый объект, военный заказ, секретность. Ему было 23. Он был самым молодым в отделе.</p>
+
+        <p>С 1983 по 1987 — разработка «Морфея». Писал код, собирал схемы, тестировал систему. Знал «Морфей» лучше всех. Знал, что машина нестабильна. Что она перегружает мозг. Что эксперименты на грани. Но был молод. Верил в науку.</p>
+
+        <p>В 1986 женился. Жена — лаборантка из соседнего отдела. В 1988 родился сын, в 1990 — дочь.</p>
+
+        <p>В 1987 произошёл инцидент с Крыловым. Мельник был там. Видел показатели. Знал, что нужно отключить пациента. Не смог — «Морфей» заблокировал команды. Пытался обойти защиту — не успел. Оставил Крылова подключённым. Это было его решение. До сих пор оправдывает: «Если бы отключил — он бы умер. Или хуже».</p>
+
+        <p>В 1992 уволился. Не выдержал. Уехал с семьёй в Подмосковье. Работал в частной фирме, потом — учителем информатики в школе. К теме снов не возвращался.</p>
+
+        <p>Жена умерла в 2015. Рак. Дети выросли, уехали. Сын — в Канаде, дочь — в Германии. Звонят раз в месяц. Отношения формальные.</p>
+
+        <p>Живёт один в квартире, забитой книгами и коробками с бумагами. Не выбрасывает ничего. Говорит: «Там всё, что от меня осталось».</p>
+
+        <p class="dossier__final">Последние годы мучается бессонницей. Спит по два часа. Просыпается от одного сна: коридор НИИ, запах озона, детский голос, который зовёт его по имени. Никому не рассказывал.</p>
+    </div>
+
+</section>
+</script>
+
+<!-- ==================================================
+     2. ПЕРЕПИСКА
+     ================================================== -->
+<script type="text/template" id="tpl-dialog">
+<section class="doc doc--dialog">
+
+    <h2 class="doc__title">РАЗГОВОР</h2>
+
+    <div class="scene print" data-lines='["Звонок в дверь. Мельник открывает. На пороге — женщина лет сорока, темное пальто. За ней — мужчина. Молчаливый. С папкой."]'></div>
+
+    <div class="scene print" data-lines='["Мельник не приглашает. Стоит и смотрит. Молчит секунд десять."]'></div>
+
+    <div class="chat">
+        <div class="chat__line print" data-lines='["— Виктор Иванович?"]'></div>
+        <div class="chat__line print" data-lines='["— Кто вы?"]'></div>
+        <div class="chat__line print" data-lines='["— Меня зовут... это неважно. Я по поводу НИИ «Сфера»."]'></div>
+        <div class="chat__line print" data-lines='["— Я не разговариваю на эту тему. Уходите."]'></div>
+        <div class="chat__line print" data-lines='["— Я знаю, что вы не разговариваете. Я знаю, что вы молчали тридцать три года. Я знаю почему. Я пришла не для того, чтобы вы вспоминали. Я пришла для того, чтобы вы действовали."]'></div>
+        <div class="chat__line print" data-lines='["— Действовали как?"]'></div>
+        <div class="chat__line print" data-lines='["— «Морфей» всё ещё работает. Крылов все еще подключен. Вы это знаете. Вы проверяете каждый год."]'></div>
+    </div>
+
+    <div class="scene print" data-lines='["Мельник делает шаг назад. Смотрит на женщину. Потом на мужчину. Потом в сторону. Вздыхает."]'></div>
+
+    <div class="chat">
+        <div class="chat__line print" data-lines='["— Заходите. В сенях снимите обувь. У меня чисто."]'></div>
+    </div>
+
+    <div class="scene print" data-lines='["Они проходят на кухню. Мельник ставит чайник. Садится. Не предлагает сесть им. Они садятся сами."]'></div>
+
+    <div class="chat">
+        <div class="chat__line print" data-lines='["— Что вы хотите?"]'></div>
+        <div class="chat__line print" data-lines='["— Чтобы вы пошли с нами. Внутрь. Нам нужен человек, который знает систему."]'></div>
+        <div class="chat__line print" data-lines='["— Я не вернусь туда, чтобы снова смотреть, как они умирают."]'></div>
+        <div class="chat__line print" data-lines='["— Вы вернетесь не для того, чтобы смотреть. Вы вернётесь для того, чтобы сделать."]'></div>
+        <div class="chat__line print" data-lines='["— Что «сделать»?"]'></div>
+        <div class="chat__line print" data-lines='["— Отключить."]'></div>
+    </div>
+
+    <div class="scene print" data-lines='["Мельник долго смотрит в стол. Молчит. Потом:"]'></div>
+
+    <div class="chat">
+        <div class="chat__line print" data-lines='["— Вы понимаете, что его нельзя просто отключить? Система заблокирует всё. Я знаю. Я пытался."]'></div>
+        <div class="chat__line print" data-lines='["— Значит, вы знаете больше, чем мы. Поэтому вы и нужны."]'></div>
+        <div class="chat__line print" data-lines='["— Я не инженер. Я старик. Я тридцать лет не держал паяльник."]'></div>
+        <div class="chat__line print" data-lines='["— Вы знаете «Морфей» лучше всех. Вы писали его код. Вы знаете, где слабые места. Нам нужен не инженер. Нам нужен человек, который помнит."]'></div>
+    </div>
+
+    <div class="scene print" data-lines='["Мельник встаёт. Открывает шкаф. Достает старую папку. Кладёт на стол."]'></div>
+
+    <div class="chat">
+        <div class="chat__line print" data-lines='["— Здесь — схемы. Я сохранил. Тридцать лет хранил. Думал — сожгу. Не сжёг."]'></div>
+        <div class="chat__line print" data-lines='["— Вы поедете?"]'></div>
+        <div class="chat__line print" data-lines='["— Я поеду. Но не из-за вас. Из-за него. Я должен ему сказать одну вещь. Я не успел в восемьдесят седьмом."]'></div>
+        <div class="chat__line print" data-lines='["— Что сказать?"]'></div>
+        <div class="chat__line print" data-lines='["— Это не ваше дело."]'></div>
+    </div>
+
+    <div class="scene scene--final print" data-lines='["Мельник больше ничего не говорит. Они уходят. Он стоит у окна. Смотрит им вслед. Через три дня — собирает сумку."]'></div>
+
+</section>
+</script>
+
+<!-- ==================================================
+     3. МОТИВАЦИЯ
+     ================================================== -->
+<script type="text/template" id="tpl-motivation">
+<section class="doc doc--motivation">
+
+    <h2 class="doc__title">МОТИВАЦИЯ</h2>
+
+    <div class="motivation">
+        <p class="motivation__lead">В 1987 году он оставил Крылова подключённым. Он принял это решение. Он живёт с ним 38 лет. Каждую ночь — один и тот же сон: коридор, запах озона, детский голос, который зовёт его по имени.</p>
+
+        <p>Он не ищет прощения. Он ищет завершения.</p>
+
+        <p class="motivation__final">Он должен отключить систему — сам. Не кто-то другой. Он.</p>
+    </div>
+
+</section>
+</script>
+
+<!-- ==================================================
+     4. ЛИЧНЫЕ ПОДЦЕЛИ
+     ================================================== -->
+<script type="text/template" id="tpl-goals">
+<section class="doc doc--goals">
+
+    <h2 class="doc__title">ЛИЧНЫЕ ПОДЦЕЛИ</h2>
+
+    <ol class="goals">
+        <li class="goal">
+            <div class="goal__num">01</div>
+            <div class="goal__body">
+                <p class="goal__main">Найти свою докладную о камере №3. Проверить, что написал сам и какую резолюцию наложил директор.</p>
+            </div>
+        </li>
+
+        <li class="goal">
+            <div class="goal__num">02</div>
+            <div class="goal__body">
+                <p class="goal__main">Найти технические характеристики ЭВМ «Морфей». Убедиться, что помнит систему правильно.</p>
+            </div>
+        </li>
+
+        <li class="goal">
+            <div class="goal__num">03</div>
+            <div class="goal__body">
+                <p class="goal__main">Найти акт о консервации оборудования. Проверить, что там написано про криокамеры.</p>
+            </div>
+        </li>
+
+        <li class="goal">
+            <div class="goal__num">04</div>
+            <div class="goal__body">
+                <p class="goal__main">Найти свою собственную записку, оставленную в 1992 году. Понять, почему код, который он написал, не совпадал с настоящим.</p>
+            </div>
+        </li>
+
+        <li class="goal">
+            <div class="goal__num">05</div>
+            <div class="goal__body">
+                <p class="goal__main">Найти свои показания 1992 года. Перечитать то, что говорил тогда.</p>
+            </div>
+        </li>
+
+        <li class="goal">
+            <div class="goal__num">06</div>
+            <div class="goal__body">
+                <p class="goal__main">Найти дневник Вельского. Полную версию. Особенно записи за март–июнь 1987.</p>
+            </div>
+        </li>
+    </ol>
+
+</section>
+</script>
+
+<!-- ==================================================
+     5. ОБЩИЕ ЦЕЛИ — НЕ ТРОГАЕМ
+     ================================================== -->
+<script type="text/template" id="tpl-goals-shared">
+<section class="doc doc--goals">
+
+    <h2 class="doc__title">ОБЩИЕ ЦЕЛИ</h2>
+
+    <ol class="goals">
+        <li class="goal">
+            <div class="goal__num">01</div>
+            <div class="goal__body">
+                <p class="goal__main">Проникнуть на территорию НИИ «Сфера».</p>
+            </div>
+        </li>
+
+        <li class="goal">
+            <div class="goal__num">02</div>
+            <div class="goal__body">
+                <p class="goal__main">Найти вход в подземный бункер.</p>
+            </div>
+        </li>
+
+        <li class="goal">
+            <div class="goal__num">03</div>
+            <div class="goal__body">
+                <p class="goal__main">Добраться до ЭВМ «Морфей» — ядро системы.</p>
+            </div>
+        </li>
+
+        <li class="goal">
+            <div class="goal__num">04</div>
+            <div class="goal__body">
+                <p class="goal__main">Запустить систему. Вывести из консервации.</p>
+            </div>
+        </li>
+
+        <li class="goal">
+            <div class="goal__num">05</div>
+            <div class="goal__body">
+                <p class="goal__main">Погрузиться в коллективный сон. Все восемь — одновременно.</p>
+            </div>
+        </li>
+
+        <li class="goal">
+            <div class="goal__num">06</div>
+            <div class="goal__body">
+                <p class="goal__main">Внутри сна — найти источник «сонной болезни».</p>
+            </div>
+        </li>
+
+        <li class="goal">
+            <div class="goal__num">07</div>
+            <div class="goal__body">
+                <p class="goal__main">Остановить распространение. Любым способом.</p>
+            </div>
+        </li>
+
+        <li class="goal">
+            <div class="goal__num">08</div>
+            <div class="goal__body">
+                <p class="goal__main">Вернуться с данными. Если получится — все. Если нет — хотя бы один.</p>
+            </div>
+        </li>
+    </ol>
+
+</section>
+</script>
+
+<script src="script.js"></script>
+</body>
+</html>
